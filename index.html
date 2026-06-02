@@ -16,7 +16,7 @@
     <!-- Google Fonts: Una tipografía moderna y amigable -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://i.pinimg.com/736x/da/e8/6a/dae86a4b2b6510b1a80859aeb6cc9304.jpg" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&display=swap" rel="stylesheet">
 
     <style>
         /* --- VARIABLES DE COLOR --- */
@@ -77,7 +77,8 @@
         }
         .hero .logo-sindicato {
             max-width: 200px;
-            margin-bottom: 100px;
+            width: 90%;
+            margin-bottom: 32px;
             /* filter: brightness(0) invert(1);*/
         }
         .hero h1 {
@@ -123,7 +124,117 @@
             margin-bottom: 10px;
         }
 
-        /* --- 3. SECCIÓN DE INFORMACIÓN --- */
+        /* --- 3. SECCIÓN GALERÍA / CARRUSEL --- */
+        #galeria {
+            background: linear-gradient(135deg, var(--morado) 0%, #4a0080 100%);
+            padding: 70px 0;
+        }
+        #galeria .section-title {
+            color: var(--amarillo);
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.4);
+        }
+        #galeria .section-subtitle {
+            text-align: center;
+            color: rgba(255,255,255,0.85);
+            font-size: 1.15rem;
+            margin-top: -25px;
+            margin-bottom: 40px;
+        }
+        .carousel-wrapper {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .carousel-track-container {
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+            touch-action: pan-y;
+        }
+        .carousel-track {
+            display: flex;
+            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .carousel-slide {
+            min-width: 100%;
+            position: relative;
+        }
+        .carousel-slide img {
+            width: 100%;
+            height: 520px;
+            object-fit: cover;
+            display: block;
+        }
+        .carousel-slide::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 80px;
+            background: linear-gradient(transparent, rgba(0,0,0,0.4));
+        }
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 211, 5, 0.9);
+            color: var(--morado);
+            border: none;
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            font-size: 1.4rem;
+            font-weight: 900;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .carousel-btn:hover {
+            background: var(--amarillo);
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 6px 20px rgba(255,211,5,0.5);
+        }
+        .carousel-btn.prev { left: -26px; }
+        .carousel-btn.next { right: -26px; }
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        .carousel-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.35);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            padding: 0;
+        }
+        .carousel-dot.active {
+            background: var(--amarillo);
+            transform: scale(1.4);
+        }
+        .carousel-counter {
+            text-align: center;
+            color: rgba(255,255,255,0.6);
+            font-size: 0.9rem;
+            margin-top: 12px;
+            letter-spacing: 1px;
+        }
+        @media (max-width: 768px) {
+            .carousel-slide img { height: 280px; }
+            .carousel-btn { width: 40px; height: 40px; font-size: 1.1rem; }
+            .carousel-btn.prev { left: 5px; }
+            .carousel-btn.next { right: 5px; }
+        }
+
+        /* --- 4. SECCIÓN DE INFORMACIÓN --- */
         #informacion {
             background-color: var(--morado);
             color: var(--blanco);
@@ -143,8 +254,7 @@
             padding: 25px;
             border-radius: 10px;
             text-align: center;
-            flex: 1;
-            min-width: 280px;
+            flex: 1 1 220px;
             font-weight: 700;
         }
         .info-card h4 {
@@ -267,6 +377,10 @@
             100% { transform: rotate(0deg); }
         }
 
+        @media (min-width: 768px) {
+            .cta-title { text-align: left; }
+        }
+
         /* --- FOOTER --- */
         footer {
             background: var(--texto-oscuro);
@@ -288,21 +402,55 @@
             transform: translateY(0);
         }
 
-        /* --- MEDIA QUERIES PARA RESPONSIVE DESIGN --- */
+        /* --- MEDIA QUERIES --- */
+
+        /* Móvil pequeño (hasta 480px) */
+        @media (max-width: 480px) {
+            .section-title { font-size: 1.7rem; margin-bottom: 25px; }
+            .hero { padding: 50px 16px 40px; }
+            .hero .logo-sindicato { max-width: 85%; margin-bottom: 28px; }
+            .hero h1 { font-size: 1.6rem; line-height: 1.2; }
+            .hero h3 { font-size: 1rem; margin-bottom: 16px; }
+            .hero p  { font-size: 0.9rem; }
+            .hero .cta-button { font-size: 1rem; padding: 13px 24px; }
+            .activities-grid { grid-template-columns: 1fr; gap: 15px; }
+            .activity-card { padding: 20px 16px; }
+            .activity-card .icon { font-size: 2.2rem; }
+            .activity-card h4 { font-size: 1.05rem; }
+            #galeria .section-subtitle { font-size: 0.95rem; margin-bottom: 24px; }
+            .carousel-dots { gap: 5px; }
+            .carousel-dot { width: 7px; height: 7px; }
+            .info-card { min-width: unset; width: 100%; }
+            .extra-info { font-size: 0.95rem; }
+            .image-placeholder { height: 260px; max-width: 100%; }
+            .cta-button { font-size: 0.95rem; padding: 13px 20px; }
+            #ubicacion h3 { font-size: 1.2rem; }
+            #ubicacion p  { font-size: 0.95rem; }
+        }
+
+        /* Móvil grande / tablet pequeña (481px–767px) */
+        @media (min-width: 481px) and (max-width: 767px) {
+            .section-title { font-size: 2rem; }
+            .hero .logo-sindicato { max-width: 75%; margin-bottom: 36px; }
+            .hero h1 { font-size: 2rem; }
+            .hero h3 { font-size: 1.15rem; }
+            .activities-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+            .info-card { min-width: unset; flex: 1 1 45%; }
+            .image-placeholder { height: 320px; }
+        }
+
+        /* Tablet y escritorio (768px+) */
         @media (min-width: 768px) {
             .section-title { font-size: 3rem; }
+            .hero .logo-sindicato { margin-bottom: 50px; }
             .hero h1 { font-size: 4.5rem; }
             .hero h3 { font-size: 1.8rem; }
             .final-cta-container {
                 flex-direction: row;
                 gap: 60px;
             }
-            .final-cta-content {
-                text-align: left;
-            }
-            .image-placeholder {
-                height: 550px;
-            }
+            .final-cta-content { text-align: left; }
+            .image-placeholder { height: 550px; }
         }
     </style>
 
@@ -348,45 +496,97 @@
                 <h2 class="section-title hidden">Un Verano de Aventuras</h2>
                 <div class="activities-grid">
                     <div class="activity-card hidden">
-                        <div class="icon">🎭</div>
-                        <h4>Actuación (Teatro)</h4>
-                        <p>¡De la timidez al escenario! Expresión y confianza.</p>
-                    </div>
-                    <div class="activity-card hidden">
-                        <div class="icon">🎨</div>
-                        <h4>Máscaras y Manualidades</h4>
-                        <p>Creación sin límites para sus pequeñas manos.</p>
-                    </div>
-                    <div class="activity-card hidden">
-                        <div class="icon">👨‍🍳</div>
-                        <h4>Minichef</h4>
-                        <p>Pequeños artistas de la cocina preparando delicias.</p>
-                    </div>
-                    <div class="activity-card hidden">
-                        <div class="icon">🎤</div>
-                        <h4>Canto y Baile</h4>
-                        <p>Libera la estrella que llevan dentro con ritmo y voz.</p>
-                    </div>
-                    <div class="activity-card hidden">
-                        <div class="icon">🤸</div>
-                        <h4>Juegos Recreativos</h4>
-                        <p>Diversión, energía y trabajo en equipo garantizados.</p>
+                        <div class="icon">💃</div>
+                        <h4>Baile</h4>
+                        <p>¡Ritmo y movimiento para liberar la energía!</p>
                     </div>
                     <div class="activity-card hidden">
                         <div class="icon">🤡</div>
-                        <h4>Clown (Arte del Payaso)</h4>
+                        <h4>Clown</h4>
                         <p>Aprende a hacer reír y a conectar con la alegría.</p>
                     </div>
                     <div class="activity-card hidden">
-                        <div class="icon">🩹</div>
-                        <h4>Primeros Auxilios Básicos</h4>
-                        <p>Pequeños héroes aprendiendo habilidades que salvan.</p>
+                        <div class="icon">🤸</div>
+                        <h4>Juegos</h4>
+                        <p>Diversión, energía y trabajo en equipo garantizados.</p>
+                    </div>
+                    <div class="activity-card hidden">
+                        <div class="icon">👨‍🍳</div>
+                        <h4>Mini Chef</h4>
+                        <p>Pequeños artistas de la cocina preparando delicias.</p>
+                    </div>
+                    <div class="activity-card hidden">
+                        <div class="icon">🔬</div>
+                        <h4>Experimentos</h4>
+                        <p>¡Ciencia divertida y explosiva para mentes curiosas!</p>
+                    </div>
+                    <div class="activity-card hidden">
+                        <div class="icon">✂️</div>
+                        <h4>Manualidades</h4>
+                        <p>Creación sin límites para sus pequeñas manos.</p>
+                    </div>
+                    <div class="activity-card hidden">
+                        <div class="icon">🎨</div>
+                        <h4>Artes Plásticas</h4>
+                        <p>Pintura, escultura y expresión artística libre.</p>
+                    </div>
+                    <div class="activity-card hidden">
+                        <div class="icon">🎭</div>
+                        <h4>Teatro & Antifaces</h4>
+                        <p>¡Del escenario a las máscaras, pura actuación!</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- ======================= SECCIÓN 3: INFORMACIÓN CLAVE ======================= -->
+        <!-- ======================= SECCIÓN 3: GALERÍA CARRUSEL ======================= -->
+        <section id="galeria" class="section">
+            <div class="container">
+                <h2 class="section-title hidden">¡Así Vivimos el Verano Pasado!</h2>
+                <p class="section-subtitle hidden">Momentos reales, sonrisas auténticas. ¡Tu hij@ podría ser el próximo!</p>
+
+                <div class="carousel-wrapper hidden">
+                    <div class="carousel-track-container">
+                        <div class="carousel-track" id="carouselTrack">
+                            <div class="carousel-slide"><img src="./img/galeria/1.jpeg" alt="Curso de Verano Zeffata - Actividad 1" loading="lazy"></div>
+                            <div class="carousel-slide"><img src="./img/galeria/2.jpeg" alt="Curso de Verano Zeffata - Actividad 2" loading="lazy"></div>
+                            <div class="carousel-slide"><img src="./img/galeria/3.jpeg" alt="Curso de Verano Zeffata - Actividad 3" loading="lazy"></div>
+                            <div class="carousel-slide"><img src="./img/galeria/4.jpeg" alt="Curso de Verano Zeffata - Actividad 4" loading="lazy"></div>
+                            <div class="carousel-slide"><img src="./img/galeria/5.jpeg" alt="Curso de Verano Zeffata - Actividad 5" loading="lazy"></div>
+                            <div class="carousel-slide"><img src="./img/galeria/6.jpeg" alt="Curso de Verano Zeffata - Actividad 6" loading="lazy"></div>
+                            <div class="carousel-slide"><img src="./img/galeria/7.jpeg" alt="Curso de Verano Zeffata - Actividad 7" loading="lazy"></div>
+                            <div class="carousel-slide"><img src="./img/galeria/8.jpeg" alt="Curso de Verano Zeffata - Actividad 8" loading="lazy"></div>
+                            <div class="carousel-slide"><img src="./img/galeria/9.jpeg" alt="Curso de Verano Zeffata - Actividad 9" loading="lazy"></div>
+                            <div class="carousel-slide"><img src="./img/galeria/10.jpg" alt="Curso de Verano Zeffata - Actividad 10" loading="lazy"></div>
+                            <div class="carousel-slide"><img src="./img/galeria/11.jpg" alt="Curso de Verano Zeffata - Actividad 11" loading="lazy"></div>
+                            <div class="carousel-slide"><img src="./img/galeria/12.jpeg" alt="Curso de Verano Zeffata - Actividad 12" loading="lazy"></div>
+                            <div class="carousel-slide"><img src="./img/galeria/13.jpeg" alt="Curso de Verano Zeffata - Actividad 13" loading="lazy"></div>
+                            <div class="carousel-slide"><img src="./img/galeria/14.jpeg" alt="Curso de Verano Zeffata - Actividad 14" loading="lazy"></div>
+                            <div class="carousel-slide"><img src="./img/galeria/15.jpeg" alt="Curso de Verano Zeffata - Actividad 15" loading="lazy"></div>
+                            <div class="carousel-slide"><img src="./img/galeria/16.jpeg" alt="Curso de Verano Zeffata - Actividad 16" loading="lazy"></div>
+                            <div class="carousel-slide"><img src="./img/galeria/17.jpg" alt="Curso de Verano Zeffata - Actividad 17" loading="lazy"></div>
+                            <div class="carousel-slide"><img src="./img/galeria/18.jpeg" alt="Curso de Verano Zeffata - Actividad 18" loading="lazy"></div>
+                            <div class="carousel-slide"><img src="./img/galeria/19.jpeg" alt="Curso de Verano Zeffata - Actividad 19" loading="lazy"></div>
+                            <div class="carousel-slide"><img src="./img/galeria/20.jpeg" alt="Curso de Verano Zeffata - Actividad 20" loading="lazy"></div>
+                            <div class="carousel-slide"><img src="./img/galeria/21.jpeg" alt="Curso de Verano Zeffata - Actividad 21" loading="lazy"></div>
+                            <div class="carousel-slide"><img src="./img/galeria/22.jpeg" alt="Curso de Verano Zeffata - Actividad 22" loading="lazy"></div>
+                            <div class="carousel-slide"><img src="./img/galeria/23.jpeg" alt="Curso de Verano Zeffata - Actividad 23" loading="lazy"></div>
+                            <div class="carousel-slide"><img src="./img/galeria/24.jpeg" alt="Curso de Verano Zeffata - Actividad 24" loading="lazy"></div>
+                            <div class="carousel-slide"><img src="./img/galeria/25.jpeg" alt="Curso de Verano Zeffata - Actividad 25" loading="lazy"></div>
+                            <div class="carousel-slide"><img src="./img/galeria/26.jpeg" alt="Curso de Verano Zeffata - Actividad 26" loading="lazy"></div>
+                            <div class="carousel-slide"><img src="./img/galeria/27.jpeg" alt="Curso de Verano Zeffata - Actividad 27" loading="lazy"></div>
+                        </div>
+                    </div>
+                    <button class="carousel-btn prev" id="prevBtn" aria-label="Anterior">&#8592;</button>
+                    <button class="carousel-btn next" id="nextBtn" aria-label="Siguiente">&#8594;</button>
+                </div>
+
+                <div class="carousel-dots" id="carouselDots"></div>
+                <p class="carousel-counter" id="carouselCounter">1 / 27</p>
+            </div>
+        </section>
+
+        <!-- ======================= SECCIÓN 4: INFORMACIÓN CLAVE ======================= -->
         <section id="informacion" class="section">
             <div class="container">
                 <h2 class="section-title hidden">Datos para Papás Geniales</h2>
@@ -397,8 +597,8 @@
                     </div>
                     <div class="info-card hidden">
                         <h4>Fechas</h4>
-                        <p>14 de Julio al 15 de Agosto</p>
-                        <p>2025</p>
+                        <p>20 de Julio al 21 de Agosto</p>
+                        <p>2026</p>
                     </div>
                     <div class="info-card hidden">
                         <h4>Horario</h4>
@@ -446,7 +646,7 @@
 
 
                 <div class="final-cta-content hidden">
-                    <h2 class="section-title" style="text-align: left;">¡La Aventura está por Comenzar!</h2>
+                    <h2 class="section-title cta-title">¡La Aventura está por Comenzar!</h2>
                     <p>Las plazas son limitadas para garantizar una atención personalizada y la mejor experiencia para cada niño. ¡No dejes que se queden fuera de la diversión!</p>
                     <p><strong>Reserva su lugar ahora mismo con un simple mensaje.</strong></p>
                     <a href="https://wa.me/5214426374165?text=¡Hola!%20👋%20Vengo%20del%20futuro%20y%20mi%20hij@%20me%20dijo%20que%20este%20curso%20de%20verano%20en%20ZEFFATA%20estuvo%20increíble.%20¡Quiero%20más%20informes%20por%20favor!" target="_blank" class="cta-button whatsapp">
@@ -460,12 +660,59 @@
     <!-- ======================= FOOTER ======================= -->
     <footer>
         <div class="container">
-            <p>© 2025 MOTUS arte en movimiento & Zeffata. Todos los derechos reservados.</p>
+            <p>© 2026 MOTUS arte en movimiento & Zeffata. Todos los derechos reservados.</p>
         </div>
     </footer>
 
     <!-- ======================= JAVASCRIPT ======================= -->
     <script>
+        // --- Carrusel de Galería ---
+        (function() {
+            const track = document.getElementById('carouselTrack');
+            const dotsContainer = document.getElementById('carouselDots');
+            const counter = document.getElementById('carouselCounter');
+            const total = track.children.length;
+            let current = 0;
+            let autoTimer;
+
+            // Crear puntos
+            for (let i = 0; i < total; i++) {
+                const dot = document.createElement('button');
+                dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+                dot.setAttribute('aria-label', 'Ir a foto ' + (i + 1));
+                dot.addEventListener('click', () => goTo(i));
+                dotsContainer.appendChild(dot);
+            }
+
+            function goTo(index) {
+                current = (index + total) % total;
+                track.style.transform = 'translateX(-' + (current * 100) + '%)';
+                dotsContainer.querySelectorAll('.carousel-dot').forEach((d, i) => {
+                    d.classList.toggle('active', i === current);
+                });
+                counter.textContent = (current + 1) + ' / ' + total;
+                resetAuto();
+            }
+
+            function resetAuto() {
+                clearInterval(autoTimer);
+                autoTimer = setInterval(() => goTo(current + 1), 3500);
+            }
+
+            document.getElementById('prevBtn').addEventListener('click', () => goTo(current - 1));
+            document.getElementById('nextBtn').addEventListener('click', () => goTo(current + 1));
+
+            // Swipe táctil
+            let touchStartX = 0;
+            track.parentElement.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+            track.parentElement.addEventListener('touchend', e => {
+                const diff = touchStartX - e.changedTouches[0].clientX;
+                if (Math.abs(diff) > 50) goTo(diff > 0 ? current + 1 : current - 1);
+            });
+
+            resetAuto();
+        })();
+
         // --- Animación de aparición al hacer scroll ---
         const observer = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
